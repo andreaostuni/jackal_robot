@@ -62,6 +62,13 @@ def generate_launch_description():
             ))
         ),
 
+        # Taranis Teleop
+        IncludeLaunchDescription(
+            PythonLaunchDescriptionSource(PathJoinSubstitution(
+                [FindPackageShare('remote_joypad'), 'launch', 'teleop.launch.py']
+            ))
+        ),
+
         # Diagnostics
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(PathJoinSubstitution(
@@ -74,7 +81,7 @@ def generate_launch_description():
             PythonLaunchDescriptionSource(PathJoinSubstitution(
                 [FindPackageShare('wireless_watcher'), 'launch', 'watcher.launch.py']
             )),
-            launch_arguments=[('connected_topic', 'wifi_connected')]
+            launch_arguments=[('dev', 'wlp2s0'), ('connected_topic', 'wifi_connected')]
         ),
 
         # MicroROS Agent
@@ -83,6 +90,7 @@ def generate_launch_description():
             executable='micro_ros_agent',
             arguments=['serial', '--dev', '/dev/jackal'],
             output='screen',
+            emulate_tty=True,
         ),
     ])
 

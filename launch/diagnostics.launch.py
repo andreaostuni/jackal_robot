@@ -34,11 +34,13 @@ def generate_launch_description():
         package='diagnostic_aggregator',
         executable='aggregator_node',
         output='screen',
+        emulate_tty=True,
         parameters=[analyzer_params_filepath])
     diag_publisher = Node(
          package='jackal_robot',
          executable='diagnostics_updater',
-         output='screen')
+         output='screen',
+         emulate_tty=True)
     return launch.LaunchDescription([
         aggregator,
         diag_publisher,
