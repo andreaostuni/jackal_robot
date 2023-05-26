@@ -11,13 +11,14 @@ def generate_launch_description():
 
     # Get URDF via xacro
     robot_description_command = [
-            PathJoinSubstitution([FindExecutable(name='xacro')]),
-            ' ',
-            PathJoinSubstitution(
-                [FindPackageShare('jackal_description'), 'urdf', 'jackal.urdf.xacro']
-            ),
-            ' ',
-        ]
+        PathJoinSubstitution([FindExecutable(name='xacro')]),
+        ' ',
+        PathJoinSubstitution(
+            [FindPackageShare('jackal_description'),
+             'urdf', 'jackal.urdf.xacro']
+        ),
+        ' ',
+    ]
 
     jackal_bringup_group_action = GroupAction([
 
@@ -30,58 +31,68 @@ def generate_launch_description():
                      'description.launch.py']
                 )
             ),
-            launch_arguments=[('robot_description_command', robot_description_command)]
+            launch_arguments=[('robot_description_command',
+                               robot_description_command)]
         ),
 
         # Jackal Control
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(PathJoinSubstitution(
-                [FindPackageShare('jackal_control'), 'launch', 'control.launch.py']
+                [FindPackageShare('jackal_control'),
+                 'launch', 'control.launch.py']
             )),
-            launch_arguments=[('robot_description_command', robot_description_command)]
+            launch_arguments=[('robot_description_command',
+                               robot_description_command)]
         ),
 
         # Accessories
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(PathJoinSubstitution(
-                [FindPackageShare('jackal_robot'), 'launch', 'accessories.launch.py']
+                [FindPackageShare('jackal_robot'), 'launch',
+                 'accessories.launch.py']
             ))
         ),
 
         # Base Teleop
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(PathJoinSubstitution(
-                [FindPackageShare('jackal_control'), 'launch', 'teleop_base.launch.py']
+                [FindPackageShare('jackal_control'), 'launch',
+                 'teleop_base.launch.py']
             ))
         ),
 
         # Joy Teleop
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(PathJoinSubstitution(
-                [FindPackageShare('jackal_control'), 'launch', 'teleop_joy.launch.py']
+                [FindPackageShare('jackal_control'), 'launch',
+                 'teleop_joy.launch.py']
             ))
         ),
 
         # Taranis Teleop
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(PathJoinSubstitution(
-                [FindPackageShare('remote_joypad'), 'launch', 'teleop.launch.py']
+                [FindPackageShare('remote_joypad'), 'launch',
+                 'teleop.launch.py']
             ))
         ),
 
         # Diagnostics
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(PathJoinSubstitution(
-                [FindPackageShare('jackal_robot'), 'launch', 'diagnostics.launch.py']
+                [FindPackageShare('jackal_robot'), 'launch',
+                 'diagnostics.launch.py']
             ))
         ),
 
         # Wireless Watcher
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(PathJoinSubstitution(
-                [FindPackageShare('wireless_watcher'), 'launch', 'watcher.launch.py']
+                [FindPackageShare('wireless_watcher'),
+                 'launch', 'watcher.launch.py']
             )),
-            launch_arguments=[('dev', 'wlp2s0'), ('connected_topic', 'wifi_connected')]
+            launch_arguments=[('dev', 'wlp2s0'),
+                              ('connected_topic', 'wifi_connected')]
         ),
 
         # MicroROS Agent
