@@ -31,6 +31,23 @@ def generate_launch_description():
                 ]
             )
             ld.add_action(node_hokuyo)
+        elif (primary_lidar_model.perform(lc) == 'rplidar'):
+            node_rplidar = Node(
+                name='rplidar_composition',
+                package='rplidar_ros',
+                executable='rplidar_composition',
+                output='screen',
+                parameters=[{
+                    'serial_port': '/dev/rplidar',
+                    'serial_baudrate': 115200,  # A1 / A2
+                    # 'serial_baudrate': 256000, # A3
+                    'topic_name': primary_lidar_topic,
+                    'frame_id': primary_lidar_mount,
+                    'inverted': False,
+                    'angle_compensate': True,
+                }]
+            )
+            ld.add_action(node_rplidar)
 
 
     # Secondary Lidar Environment Variables
