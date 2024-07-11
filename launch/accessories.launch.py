@@ -66,11 +66,9 @@ def generate_launch_description():
                 parameters=[
                     PathJoinSubstitution(
                         [
-                            [
-                                FindPackageShare("jackal_robot"),
-                                "config",
-                                "laser_filter.yaml",
-                            ],
+                            FindPackageShare("jackal_robot"),
+                            "config",
+                            "laser_filter.yaml",
                         ]
                     )
                 ],
