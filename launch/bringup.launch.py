@@ -91,7 +91,7 @@ def generate_launch_description():
                 [FindPackageShare('wireless_watcher'),
                  'launch', 'watcher.launch.py']
             )),
-            launch_arguments=[('dev', 'wlp2s0'),
+            launch_arguments=[('dev', 'wlp3s0'),
                               ('connected_topic', 'wifi_connected')]
         ),
 
