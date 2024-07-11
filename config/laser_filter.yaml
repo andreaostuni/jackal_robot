@@ -1,13 +1,26 @@
 laser_filter_chain:
   ros__parameters:
     filter1:
+      type: laser_filters/LaserArrayFilter
+      name: laser_median_5
+      params: 
+        range_filter_chain:
+          filter1:
+            name: median_5
+            type: filters/MultiChannelMedianFilterFloat 
+            params:
+              number_of_observations: 5
+              unused: 10
+    filter2:
       name: box_filter
       type: laser_filters/LaserScanBoxFilter
       params:
         box_frame: laser
         max_x: 0.11
         max_y: 0.22
+        max_z: 0.5
         min_x: -0.37
         min_y: -0.22
+        min_z: -0.5
         
         invert: false # activate to remove all points outside of the box

@@ -34,7 +34,7 @@ def generate_launch_description():
                 executable="urg_node_driver",
                 name="urg_node",
                 output="screen",
-                remappings={("scan", primary_lidar_topic)},
+                remappings=[("scan", primary_lidar_topic)],
                 parameters=[
                     {"ip_address": primary_lidar_ip},
                     {"laser_frame_id": primary_lidar_mount},
@@ -52,7 +52,7 @@ def generate_launch_description():
                         "serial_port": "/dev/rplidar",
                         "serial_baudrate": 115200,  # A1 / A2
                         # 'serial_baudrate': 256000, # A3
-                        "topic_name": primary_lidar_topic,
+                        "topic_name": f"scan/raw",
                         "frame_id": primary_lidar_mount,
                         "inverted": False,
                         "angle_compensate": True,
@@ -71,6 +71,10 @@ def generate_launch_description():
                             "laser_filter.yaml",
                         ]
                     )
+                ],
+                remappings=[
+                    ("scan", "scan/raw"),
+                    ("scan_filtered", primary_lidar_topic),
                 ],
                 output="screen",
             )
